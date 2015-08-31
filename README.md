@@ -6,7 +6,7 @@ A generic php + apache docker
 
 ```yaml
 apache:
-  image: docker-registry.indigen.com/apache-php:latest
+  image: indigen/php-apache
   volume:
     - ./www/:/mnt/www
     - ./conf/apache:/mnt/conf/apache
