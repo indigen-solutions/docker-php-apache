@@ -9,4 +9,5 @@ then
     DOCUMENT_ROOT="/mnt/www"
 fi
 
+umask 002
 exec apache2 -DFOREGROUND
