@@ -4,4 +4,9 @@ set -e
 # Apache gets grumpy about PID files pre-existing
 rm -f /var/run/apache2/apache2.pid
 
+if [ -z $DOCUMENT_ROOT ]
+then
+    DOCUMENT_ROOT="/mnt/www"
+fi
+
 exec apache2 -DFOREGROUND

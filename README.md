@@ -18,3 +18,6 @@ apache:
 
  + **/mnt/www** is the default apache document root.
  + **/mnt/conf/apache/** can contain `*.conf` files that are loaded by apache.
+
+### Environment
+  + **DOCUMENT_ROOT**: By default the apache DocumentRoot is located in /mnt/www.
