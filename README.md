@@ -10,6 +10,8 @@ apache:
   volume:
     - ./www/:/mnt/www
     - ./conf/apache:/mnt/conf/apache
+  environment:
+    - DOCUMENT_ROOT=/mnt/www
   expose:
     - 80
 ```
@@ -21,3 +23,6 @@ apache:
 
 ### Environment
   + **DOCUMENT_ROOT**: By default the apache DocumentRoot is located in /mnt/www.
+  + **APACHE_USER**: By default the apache user is set to #1000. Because the container have his own passwd file you must use #UID notation.
+  + **APACHE_GROUP**: By default the apache group is set to #1000. Because the container have his own group file you must use #GID notation.
+  + **APACHE_UMASK**: By default the apache umask is set to 002.

@@ -9,5 +9,22 @@ then
     DOCUMENT_ROOT="/mnt/www"
 fi
 
-umask 002
+if [ -z "$UMASK" ]
+then
+    APACHE_UMASK="002"
+fi
+
+if [ -z "$APACHE_USER" ]
+then
+    APACHE_USER="#1000"
+fi
+
+if [ -z "$APACHE_GROUP" ]
+then
+    APACHE_GROUP="#1000"
+fi
+
+umask $APACHE_UMASK
+
+export DOCUMENT_ROOT APACHE_USER APACHE_GROUP APACHE_UMASK
 exec apache2 -DFOREGROUND
