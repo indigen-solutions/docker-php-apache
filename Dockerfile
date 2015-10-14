@@ -17,7 +17,7 @@ RUN apt-get update                                                              
         nodejs                                                                      \
         git                                                                     &&  \
     npm install -g gulp grunt-cli bower                                         &&  \
-    a2enmod headers rewrite                                                     &&  \
+    a2enmod headers rewrite proxy proxy_http                                    &&  \
     addgroup --system --gid 1000 user                                           &&  \
     adduser --system --uid 1000 --gid 1000 --shell /bin/bash user               &&  \
     mv /etc/apache2/apache2.conf /etc/apache2/apache2.conf.dist                 &&  \
