@@ -55,7 +55,7 @@ RUN cd tmp                                                                      
     make install                                                                                        &&  \
     rm -rf /tmp/*
 
-RUN npm install -g gulp grunt-cli bower                                                                 &&  \
+RUN npm install -g gulp grunt-cli bower
 
 RUN a2enmod headers rewrite proxy proxy_http                                                            &&  \
     addgroup --system --gid 1000 user                                                                   &&  \
