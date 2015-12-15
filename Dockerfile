@@ -15,6 +15,7 @@ RUN apt-get update                                                              
         php5-curl                                                                   \
         php5-imagick                                                                \
         nodejs                                                                      \
+        ssmtp                                                                       \
         git                                                                     &&  \
     npm install -g gulp grunt-cli bower                                         &&  \
     a2enmod headers rewrite proxy proxy_http                                    &&  \
@@ -25,8 +26,8 @@ RUN apt-get update                                                              
     mkdir -p /mnt/conf/apache /mnt/www
 
 COPY apache2.conf /etc/apache2/apache2.conf
-COPY apache2-foreground /usr/local/bin/
+COPY start.sh /usr/local/bin/
 COPY index.php /mnt/www/
 
 EXPOSE 80
-CMD ["apache2-foreground"]
+CMD ["start.sh"]

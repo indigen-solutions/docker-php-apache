@@ -26,3 +26,9 @@ apache:
   + **APACHE_USER**: By default the apache user is set to #1000. Because the container have his own passwd file you must use #UID notation.
   + **APACHE_GROUP**: By default the apache group is set to #1000. Because the container have his own group file you must use #GID notation.
   + **APACHE_UMASK**: By default the apache umask is set to 002.
+  + **SMTP_SERVER**: Set an smtp server for the sendmail command (No smtp config will be generated if not provided)
+  + **SMTP_HOSTNAME**: Default email sender domain (default to localhost)
+  + **SMTP_FROM**: Default FROM (default to root@localhost)
+  + **SMTP_USERNAME**: SMTP user
+  + **SMTP_PASSWORD**: SMTP password
+  + **SMTP_USE_TLS**: Use SMTP tls if set to "true"
