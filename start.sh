@@ -17,6 +17,7 @@ then
     [ ! -z "${SMTP_USERNAME}" ] && echo "AuthUser=${SMTP_USERNAME}" >> /etc/ssmtp/ssmtp.conf
     [ ! -z "${SMTP_PASSWORD}" ] && echo "AuthPass=${SMTP_PASSWORD}" >> /etc/ssmtp/ssmtp.conf
     [ "${SMTP_USE_TLS}" = "true" ] && echo "UseTLS=YES\nUseSTARTTLS=YES" >> /etc/ssmtp/ssmtp.conf
+    echo "FromLineOverride=yes" >> /etc/ssmtp/ssmtp.conf
 fi
 
 # Apache gets grumpy about PID files pre-existing
