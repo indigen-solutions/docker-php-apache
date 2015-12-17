@@ -3,17 +3,15 @@ set -e
 
 #initialize ssmtp
 SMTP_SERVER=${SMTP_SERVER-""}
-SMTP_HOSTNAME=${SMTP_HOSTNAME-"localhost"}
-SMTP_FROM=${SMTP_FROM-"root@localhost"}
+SMTP_HOSTNAME=${SMTP_HOSTNAME-$(hostname)}
 SMTP_USERNAME=${SMTP_USERNAME-""}
 SMTP_PASSWORD=${SMTP_PASSWORD-""}
 SMTP_USE_TLS=${SMTP_USE_TLS-"false"}
 
 if [ ! -z "$SMTP_SERVER" ]
 then
-    echo "mailhub=${SMTP_SERVER}" > /etc/ssmtp/ssmtp.conf
-    echo "hostname=${SMTP_HOSTNAME}" >> /etc/ssmtp/ssmtp.conf
-    echo "root=${SMTP_FROM}" >> /etc/ssmtp/ssmtp.conf
+    echo "hostname=${SMTP_HOSTNAME}" > /etc/ssmtp/ssmtp.conf
+    echo "mailhub=${SMTP_SERVER}" >> /etc/ssmtp/ssmtp.conf
     [ ! -z "${SMTP_USERNAME}" ] && echo "AuthUser=${SMTP_USERNAME}" >> /etc/ssmtp/ssmtp.conf
     [ ! -z "${SMTP_PASSWORD}" ] && echo "AuthPass=${SMTP_PASSWORD}" >> /etc/ssmtp/ssmtp.conf
     [ "${SMTP_USE_TLS}" = "true" ] && echo "UseTLS=YES\nUseSTARTTLS=YES" >> /etc/ssmtp/ssmtp.conf
