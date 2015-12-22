@@ -6,6 +6,7 @@ RUN apt-get update                                                              
         curl                                                                    &&  \
     curl --silent --location https://deb.nodesource.com/setup_4.x | bash -      &&  \
     apt-get install -y --no-install-recommends                                      \
+        wget                                                                        \
         mysql-client                                                                \
         rsync                                                                       \
         apache2                                                                     \
