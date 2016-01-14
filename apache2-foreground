@@ -1,9 +1,15 @@
 #!/bin/bash
 set -e
 
+# Exec all prestart scripts
+find /mnt/scripts/ -type f -name '*.sh' -exec {} \;
+
 # Apache gets grumpy about PID files pre-existing
 rm -f /var/run/apache2/apache2.pid
+
+APACHE_RUN_DIR=/var/run/apache2/
 mkdir -p /var/run/apache2/
+
 
 if [ -z "$DOCUMENT_ROOT" ]
 then
@@ -27,5 +33,5 @@ fi
 
 umask $APACHE_UMASK
 
-export DOCUMENT_ROOT APACHE_USER APACHE_GROUP APACHE_UMASK
+export DOCUMENT_ROOT APACHE_USER APACHE_GROUP APACHE_UMASK APACHE_RUN_DIR
 exec apache2 -DFOREGROUND
