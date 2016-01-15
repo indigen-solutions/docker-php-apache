@@ -14,6 +14,7 @@ RUN apt-get update                                                              
         php5-mcrypt                                                                 \
         php5-mysql                                                                  \
         php5-curl                                                                   \
+        php5-gd                                                                     \
         php5-imagick                                                                \
         nodejs                                                                      \
         ssmtp                                                                       \
