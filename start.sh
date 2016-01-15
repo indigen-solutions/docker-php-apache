@@ -1,15 +1,10 @@
 #!/bin/bash
 set -e
 
-# Exec all prestart scripts
-find /mnt/scripts/ -type f -name '*.sh' -exec {} \;
-
-# Apache gets grumpy about PID files pre-existing
-rm -f /var/run/apache2/apache2.pid
-
-APACHE_RUN_DIR=/var/run/apache2/
-mkdir -p /var/run/apache2/
-
+if [ -z "$APACHE_RUN_DIR" ]
+then
+    APACHE_RUN_DIR=/var/run/apache2/
+fi
 
 if [ -z "$DOCUMENT_ROOT" ]
 then
@@ -31,7 +26,17 @@ then
     APACHE_GROUP="#1000"
 fi
 
+# Apache gets grumpy about PID files pre-existing
+rm -f "$APACHE_RUN_DIR/apache2.pid"
+
+mkdir -p "$APACHE_RUN_DIR"
 umask $APACHE_UMASK
+
+# Exec all prestart scripts
+for file in $(find /mnt/scripts/start/ -name "*.sh" | sort)
+do
+    sh $file;
+done
 
 export DOCUMENT_ROOT APACHE_USER APACHE_GROUP APACHE_UMASK APACHE_RUN_DIR
 exec apache2 -DFOREGROUND

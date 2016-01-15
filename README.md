@@ -10,6 +10,7 @@ apache:
   volume:
     - ./www/:/mnt/www
     - ./conf/apache:/mnt/conf/apache
+    - ./scripts/start.sh:/mnt/scripts/start.sh
   environment:
     - DOCUMENT_ROOT=/mnt/www
   expose:
@@ -20,6 +21,7 @@ apache:
 
  + **/mnt/www** is the default apache document root.
  + **/mnt/conf/apache/** can contain `*.conf` files that are loaded by apache.
+ + **/mnt/scripts/start/** can contain `*.sh` files that are executed before apache start.
 
 ### Environment
   + **DOCUMENT_ROOT**: By default the apache DocumentRoot is located in /mnt/www.
