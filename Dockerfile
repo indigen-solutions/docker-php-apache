@@ -3,6 +3,7 @@ RUN apt-get update                                                              
     apt-get install -y --no-install-recommends                                      \
         ca-certificates                                                             \
         build-essential                                                             \
+        wget                                                                        \
         curl                                                                    &&  \
     curl --silent --location https://deb.nodesource.com/setup_4.x | bash -      &&  \
     apt-get install -y --no-install-recommends                                      \
