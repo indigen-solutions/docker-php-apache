@@ -1,35 +1,34 @@
 #!/bin/bash
 set -e
 
-if [ -z "$APACHE_RUN_DIR" ]
+APACHE_RUN_DIR=${APACHE_RUN_DIR-"/var/run/apache2"}
+DOCUMENT_ROOT=${DOCUMENT_ROOT-"/mnt/www"}
+APACHE_UMASK=${APACHE_UMASK-"002"}
+APACHE_USER=${APACHE_USER-"#1000"}
+APACHE_GROUP=${APACHE_GROUP-"#1000"}
+
+#initialize ssmtp
+SMTP_SERVER=${SMTP_SERVER-""}
+SMTP_HOSTNAME=${SMTP_HOSTNAME-$(hostname)}
+SMTP_USERNAME=${SMTP_USERNAME-""}
+SMTP_PASSWORD=${SMTP_PASSWORD-""}
+SMTP_USE_TLS=${SMTP_USE_TLS-"false"}
+
+
+if [ ! -z "$SMTP_SERVER" ]
 then
-    APACHE_RUN_DIR=/var/run/apache2/
+    echo "hostname=${SMTP_HOSTNAME}" > /etc/ssmtp/ssmtp.conf
+    echo "mailhub=${SMTP_SERVER}" >> /etc/ssmtp/ssmtp.conf
+    [ ! -z "${SMTP_USERNAME}" ] && echo "AuthUser=${SMTP_USERNAME}" >> /etc/ssmtp/ssmtp.conf
+    [ ! -z "${SMTP_PASSWORD}" ] && echo "AuthPass=${SMTP_PASSWORD}" >> /etc/ssmtp/ssmtp.conf
+    [ "${SMTP_USE_TLS}" = "true" ] && echo "UseTLS=YES\nUseSTARTTLS=YES" >> /etc/ssmtp/ssmtp.conf
+    echo "FromLineOverride=yes" >> /etc/ssmtp/ssmtp.conf
 fi
 
-if [ -z "$DOCUMENT_ROOT" ]
-then
-    DOCUMENT_ROOT="/mnt/www"
-fi
-
-if [ -z "$UMASK" ]
-then
-    APACHE_UMASK="002"
-fi
-
-if [ -z "$APACHE_USER" ]
-then
-    APACHE_USER="#1000"
-fi
-
-if [ -z "$APACHE_GROUP" ]
-then
-    APACHE_GROUP="#1000"
-fi
+mkdir -p "$APACHE_RUN_DIR"
 
 # Apache gets grumpy about PID files pre-existing
 rm -f "$APACHE_RUN_DIR/apache2.pid"
-
-mkdir -p "$APACHE_RUN_DIR"
 umask $APACHE_UMASK
 
 # Exec all prestart scripts
