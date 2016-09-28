@@ -9,6 +9,7 @@ RUN apt-get update                                                              
     wget -qO - https://www.dotdeb.org/dotdeb.gpg | apt-key add -                                &&  \
     apt-get update                                                                              &&  \
     apt-get install -y --no-install-recommends                                                      \
+        php5-cli                                                                                    \
         mysql-client                                                                                \
         rsync                                                                                       \
         openssh-client                                                                              \
