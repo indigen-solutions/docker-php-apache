@@ -17,6 +17,7 @@ RUN apt-get update                                                              
         openssh-client                                                                  \
         apache2                                                                         \
         libapache2-mod-php7.0                                                           \
+        php7.0-mbstring                                                                 \
         php7.0-mcrypt                                                                   \
         php7.0-mysql                                                                    \
         php7.0-curl                                                                     \
